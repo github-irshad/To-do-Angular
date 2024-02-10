@@ -1,20 +1,22 @@
-import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss',
 })
 export class TaskListComponent {
-markCompleted(task: any) {
-console.log("completed");
+  @Input() _taskList: any[] = [];
+  @Output() _important = new EventEmitter<any>();
+  @Output() _completed = new EventEmitter<any>();
 
-}
-markImportant(task: any) {
-console.log("Important");
-
-}
-  @Input() _taskList:any[] = []
+  markCompleted(task: any) {
+    this._completed.emit(task);
+  }
+  markImportant(task: any) {
+    this._important.emit(task);
+  }
 }

@@ -5,6 +5,7 @@ import { Injectable, inject } from '@angular/core';
   providedIn: 'root'
 })
 export class HttpService {
+ 
 httpClient = inject(HttpClient)
   constructor() { }
   addTask_http(task:string){
@@ -15,5 +16,9 @@ httpClient = inject(HttpClient)
 
   getAllTasks_http(){
     return this.httpClient.get("http://localhost:3000/tasks");
+  }
+
+  updateTask_http(task: any) {
+    return this.httpClient.put("http://localhost:3000/tasks/"+task.id,task)
   }
 }
